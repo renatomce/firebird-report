@@ -1,0 +1,76 @@
+p.topo {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 15;
+}
+
+p.rodape {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 14;
+	background-color: grey;
+	color: white;
+	padding: 4px 4px;
+}
+
+.button {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 15;
+	background-color: grey;
+	color: white;
+	transition-duration: 0.15s;
+	display: inline-block;
+	cursor: pointer;
+	border: 2px solid grey;
+	text-align: center;
+	padding: 3px 6px;
+	text-decoration: none;
+}
+
+a.button.return {
+	float: right;
+}
+	
+.button:hover {
+	background-color: white;
+	color: grey;
+	text-decoration: none;
+}
+
+table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+	width: 100%;
+}
+
+th, .cab {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    background-color: grey;
+    font-size: 13;
+    color: white;
+}
+
+.cab {text-align: left;}
+
+td {
+	border: 1px solid #ddd;
+    padding: 4px;
+    text-align: center;
+    font-size: 12;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+
+#total {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    background-color: grey;
+    font-size: 13;
+    color: white;
+}
+
+@media print {
+	.topo {display:none;}
+}
