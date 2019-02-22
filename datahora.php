@@ -26,7 +26,7 @@
 require_once("config/config.php");
 require_once("geradores/query-datahora.php");
 
-function geraTabela($array) {
+function geraTabela($array) { 
 	
     $dhInicial = new DateTime($_GET['dhInicial']);
 	$dhFinal = new DateTime($_GET['dhFinal']);
