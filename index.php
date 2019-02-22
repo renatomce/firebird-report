@@ -6,49 +6,7 @@
 <html>
 <title>Relatorios Easy Sistemas</title>
 <head>
-    <style>
-        
-        div.formulario {
-          display: block;
-          text-align: center;
-        }
-
-        form {
-          display: inline-block;
-          margin-left: auto;
-          margin-right: auto;
-          text-align: center; 
-        }
-
-        p {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        font-size: 15;
-        }
-
-        h2 {
-          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        }
-
-        .button {
-          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-          font-size: 15;
-          background-color: grey;
-          color: white;
-          transition-duration: 0.15s;
-          display: inline-block;
-          cursor: pointer;
-          border: 2px solid grey;
-          text-align: center;
-          display: inline-block;
-          padding: 4px 6px;
-
-        }
-        .button:hover {
-          background-color: white;
-          color: grey;
-        }
-
-      </style>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
