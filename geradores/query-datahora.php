@@ -2,13 +2,17 @@
 
 require_once("config/config.php");
 
-$sql1 = "SELECT A.nome_produto, SUM(A.qtdade) AS QUANTIDADE, SUM(A.vlr_total) AS TOTAL FROM res_vendas_itens A
-		INNER JOIN res_vendas B ON A.id_venda = B.id ";
-$sql2 = "";
-$sql3 = "";
-$sql4 = " AND A.cancelado = 'N' AND B.cancelado = 'N' AND B.fechado = 'S' GROUP BY nome_produto;";
 $dhInicial = new DateTime($_GET['dhInicial']);
 $dhFinal = new DateTime($_GET['dhFinal']);
+$moduloVenda = $_GET['modulo'];
+
+if($moduloVenda === 'balcao') {
+	$sql1 = "SELECT A.nome_produto, SUM(A.qtdade) AS QUANTIDADE, SUM(A.vlr_total) AS TOTAL FROM res_vendas_itens A
+	INNER JOIN res_vendas B ON A.id_venda = B.id ";
+	$sql2 = "";
+	$sql3 = "";
+	$sql4 = " AND A.cancelado = 'N' AND B.cancelado = 'N' AND B.fechado = 'S' GROUP BY nome_produto;";
+}
 
 function contaDias($dhInicial, $dhFinal) {
     $dias = $dhInicial->diff($dhFinal);
@@ -38,11 +42,9 @@ function geraSQL($sql2, $sql3) {
 }
 
 function interbase_sql_exec ($query) { 
-    
+	
+	include('config/config.php');
     $dataArr = array();
-    $database = "localhost:D:\ssa\AcaiDoForteArraial\Dados\GOURMETSA.FDB";
-    $username = "SYSDBA";
-    $password = "masterkey";
     $connection = ibase_connect($database, $username, $password, 'ISO8859_1', '100', '1');
     $rid = @ibase_query ($connection, $query); 
     if ($rid===false) errorHandle(ibase_errmsg(),$query); 

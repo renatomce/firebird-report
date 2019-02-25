@@ -12,9 +12,15 @@
 <body>
 
 <div class="formulario"> 
-	<h2>Vendas Por Horário - Balcão</h2>
+	<h2>Vendas Por Horário</h2>
 <form action="datahora.php" method="GET">
-
+	Modalidade:
+	<select name="modulo">
+    	<option value="balcao">Balcao</option>
+    	<option value="comanda">Comanda</option>
+    	<option value="delivery">Delivery</option>
+    	<option value="mesa">Mesa</option>
+  	</select>
 	<p>Data/Hora Inicial:</p>
 	<input type="datetime-local" name="dhInicial"></br>
 	<p>Data/Hora Final:</p>
