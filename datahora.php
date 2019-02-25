@@ -62,8 +62,7 @@ function geraTabela($array) {
     </tr>
 	</table>
 	</div>
-	</body>
-	</html>';
+	</body>';
 
     return $html;
 }
