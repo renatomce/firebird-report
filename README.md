@@ -9,4 +9,4 @@ There are functions to export to PDF, CSV and XLS built-in. (CSV and XLS export 
 interbase_sql_exec() runs the SQL query and returns a PHP array.
 "datahora.php" builds the html table based on the array.
 
-"index.php" and "datahora.php" can be seen as examples of implementation.
+"index.php" and "datahora.php" are examples of implementation.
