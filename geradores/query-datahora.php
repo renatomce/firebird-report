@@ -5,13 +5,32 @@ require_once("config/config.php");
 $dhInicial = new DateTime($_GET['dhInicial']);
 $dhFinal = new DateTime($_GET['dhFinal']);
 $moduloVenda = $_GET['modulo'];
+$sql2 = "";
+$sql3 = "";
+$sql4 = " AND A.cancelado = 'N' AND B.cancelado = 'N' AND B.fechado = 'S' GROUP BY A.id_produto, C.nome;";
+
+if($moduloVenda === 'mesas' || $moduloVenda === 'delivery') {
+	$campoDataEmissao = "dt_emissao";
+} else {
+	$campoDataEmissao = "dh_emissao";
+}
 
 if($moduloVenda === 'balcao') {
-	$sql1 = "SELECT A.nome_produto, SUM(A.qtdade) AS QUANTIDADE, SUM(A.vlr_total) AS TOTAL FROM res_vendas_itens A
+	$sql1 = "SELECT C.nome, SUM(A.qtdade), SUM(A.vlr_total) FROM res_vendas_itens A
+	INNER JOIN est_produtos C ON A.id_produto = C.id
 	INNER JOIN res_vendas B ON A.id_venda = B.id ";
-	$sql2 = "";
-	$sql3 = "";
-	$sql4 = " AND A.cancelado = 'N' AND B.cancelado = 'N' AND B.fechado = 'S' GROUP BY nome_produto;";
+} else if($moduloVenda === 'comandas') {
+	$sql1 = "SELECT C.nome, SUM(A.qtdade), SUM(A.vlr_total) FROM res_comandas_itens A
+    INNER JOIN est_produtos C ON A.id_produto = C.id
+    INNER JOIN res_comandas_movtos B ON A.id_movto = B.id ";
+} else if($moduloVenda === 'mesas') {
+	$sql1 = "SELECT C.nome, SUM(A.qtdade), SUM(A.vlr_total) FROM res_mesas_itens A
+    INNER JOIN est_produtos C ON A.id_produto = C.id
+	INNER JOIN res_mesas_movtos B ON A.id_movto = B.id ";
+} else if($moduloVenda === 'delivery') {
+	$sql1 = "SELECT C.nome, SUM(A.qtdade), SUM(A.vlr_total) FROM del_pedidos_itens A
+    INNER JOIN est_produtos C ON A.id_produto = C.id
+	INNER JOIN del_pedidos B ON A.id_pedido = B.id ";
 }
 
 function contaDias($dhInicial, $dhFinal) {
@@ -19,15 +38,14 @@ function contaDias($dhInicial, $dhFinal) {
     return $dias->format('%a');
 }
 
-function geraSQL($sql2, $sql3) {
+function geraSQL($sql2, $sql3, $campoDataEmissao) {
 
     $dhInicial = new DateTime($_GET['dhInicial']);
     $dhFinal = new DateTime($_GET['dhFinal']);
     $result1 = $dhInicial->format('d.m.Y');
     $result3 = $dhInicial->format('H:i');
     $result2 = $dhFinal->format('H:i');
-    $sql2 = "WHERE A.dh_emissao > '".$result1." ".$result3."' AND A.dh_emissao < '".$result1." ".$result2."' ";
-    
+    $sql2 = "WHERE A.dh_emissao >= '".$result1." ".$result3."' AND A.dh_emissao <= '".$result1." ".$result2."' ";
     $controle = contaDias($dhInicial, $dhFinal);
 
     while($controle != 0) {
@@ -35,7 +53,7 @@ function geraSQL($sql2, $sql3) {
         $result1 = $dhInicial->format('d.m.Y');
         $dhFinal->add(new DateInterval('P1D'));
         $result2 = $dhFinal->format('H:i');
-        $sql3 .= " OR A.dh_emissao > '".$result1." ".$result3."' AND A.dh_emissao < '".$result1." ".$result2."'";
+        $sql3 .= " OR A.dh_emissao >= '".$result1." ".$result3."' AND A.dh_emissao <= '".$result1." ".$result2."'";
         $controle--;
     }
 	return $sql2.$sql3;
@@ -66,9 +84,12 @@ function interbase_sql_exec ($query) {
     return $dataArr; 
 }
 
-$sql3 = geraSQL($sql2, $sql3);
+
+$sql3 = geraSQL($sql2, $sql3, $campoDataEmissao);
 $query = $sql1.$sql3.$sql4;
 $retornoQuery = interbase_sql_exec($query);
+
+echo
 
 array_walk($retornoQuery, function (&$item) {
 	$item['NOME DO PRODUTO'] = $item['0'];

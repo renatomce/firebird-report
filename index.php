@@ -17,9 +17,9 @@
 	Modalidade:
 	<select name="modulo">
     	<option value="balcao">Balcao</option>
-    	<option value="comanda">Comanda</option>
+    	<option value="comandas">Comanda</option>
     	<option value="delivery">Delivery</option>
-    	<option value="mesa">Mesa</option>
+    	<option value="mesas">Mesa</option>
   	</select>
 	<p>Data/Hora Inicial:</p>
 	<input type="datetime-local" name="dhInicial"></br>

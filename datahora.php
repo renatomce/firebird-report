@@ -30,9 +30,12 @@ function geraTabela($array) {
 	
     $dhInicial = new DateTime($_GET['dhInicial']);
 	$dhFinal = new DateTime($_GET['dhFinal']);
+	$moduloVenda = $_GET['modulo'];
+	$nomeModulo = strtoupper($moduloVenda);
 	$html = '';
     $html .= '<table id="tabela">';
-    $html .= '<th colspan="3" class="cab">VENDAS - TOTAL POR PRODUTO/HORA | ENTRE OS DIAS '.$dhInicial->format('d/m/Y').' 
+	$html .= '<th colspan="3" class="cab">VENDAS - TOTAL POR PRODUTO/HORA | '
+	.$nomeModulo.' | ENTRE OS DIAS '.$dhInicial->format('d/m/Y').' 
     E '.$dhFinal->format('d/m/Y').', DAS
     '.$dhInicial->format('H:i').'hrs AS '.$dhFinal->format('H:i').'hrs</th>';
     
@@ -56,7 +59,7 @@ function geraTabela($array) {
 	}
     $html .= '</tr>
     <tr id="total">
-    <td>TOTAIS</td>
+    <td></td>
     <td id="quantidade"></td>
     <td id="valortotal"></td>
     </tr>
@@ -77,12 +80,12 @@ echo $pagina;
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script type="text/javascript" src="scripts/geraPDF.js"></script>
 <script type="text/javascript" src="scripts/excellentexport.js"></script>
-<!--<script type="text/javascript" src="scripts/geraCSV.js"></script>-->
 <script type="text/javascript" src="scripts/somaQtde.js"></script>
 <script type="text/javascript" src="scripts/somaVlr.js"></script>
 <script type="text/javascript" src="scripts/sortTableAlfa.js"></script>
 <script type="text/javascript" src="scripts/sortTableQtde.js"></script>
 <script type="text/javascript" src="scripts/sortTableValor.js"></script>
+<script type="text/javascript" src="scripts/totalText.js"></script>
 <script>
 	window.onLoad = somaQtde();
 	window.onLoad = somaVlr();
