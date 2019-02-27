@@ -45,7 +45,7 @@ function geraSQL($sql2, $sql3, $campoDataEmissao) {
     $result1 = $dhInicial->format('d.m.Y');
     $result3 = $dhInicial->format('H:i');
     $result2 = $dhFinal->format('H:i');
-    $sql2 = "WHERE A.dh_emissao >= '".$result1." ".$result3."' AND A.dh_emissao <= '".$result1." ".$result2."' ";
+    $sql2 = "WHERE A.".$campoDataEmissao." >= '".$result1." ".$result3."' AND A.".$campoDataEmissao." <= '".$result1." ".$result2."' ";
     $controle = contaDias($dhInicial, $dhFinal);
 
     while($controle != 0) {
@@ -53,7 +53,7 @@ function geraSQL($sql2, $sql3, $campoDataEmissao) {
         $result1 = $dhInicial->format('d.m.Y');
         $dhFinal->add(new DateInterval('P1D'));
         $result2 = $dhFinal->format('H:i');
-        $sql3 .= " OR A.dh_emissao >= '".$result1." ".$result3."' AND A.dh_emissao <= '".$result1." ".$result2."'";
+        $sql3 .= " OR A.".$campoDataEmissao." >= '".$result1." ".$result3."' AND A.".$campoDataEmissao." <= '".$result1." ".$result2."'";
         $controle--;
     }
 	return $sql2.$sql3;
@@ -88,8 +88,6 @@ function interbase_sql_exec ($query) {
 $sql3 = geraSQL($sql2, $sql3, $campoDataEmissao);
 $query = $sql1.$sql3.$sql4;
 $retornoQuery = interbase_sql_exec($query);
-
-echo
 
 array_walk($retornoQuery, function (&$item) {
 	$item['NOME DO PRODUTO'] = $item['0'];
