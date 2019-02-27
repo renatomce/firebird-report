@@ -59,7 +59,7 @@ function geraTabela($array) {
 	}
     $html .= '</tr>
     <tr id="total">
-    <td></td>
+    <td><strong>TOTAL</strong></td>
     <td id="quantidade"></td>
     <td id="valortotal"></td>
     </tr>
