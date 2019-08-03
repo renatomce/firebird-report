@@ -1,7 +1,7 @@
 # firebird-report
 Web-based reporting tool for Firebird/Interbase databases.
 
-This is a very early stage web-based Firebird/Interbase reporting tool.
+This is a basic web-based Firebird/Interbase reporting tool.
 Uses PHP's "ibase_" functions to connect and retrieve data through SQL queries.
 There are functions to export to PDF, CSV and XLS built-in. (CSV and XLS export tool made by Jordi Burgos).
 
